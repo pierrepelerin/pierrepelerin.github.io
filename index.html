@@ -1,37 +1,67 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Pierre Pelerin – Développeur Web</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<title>Pierre Pelerin – Développeur Web</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+	<main class="hero">
 
-  <main class="hero">
-    <div class="card">
+	<!-- ! CARTE TITRE -->
+	<section class="card">
+		<h1>Pierre PELERIN</h1>
+		<h2>Développeur Web Full Stack</h2>
+	</section>
+	
+	<!-- ! CARTE TEXTE -->
+	<section class="card">
+		<p class="intro"><span class="icone_ext"><img src="icones/fusee.png" class="icone" alt="icone fusée"></span></p>
+		<p class="intro">Actuellement à la recherche d’une entreprise pour un <b>contrat de professionnalisation en développement web</b>, je mets à disposition un profil hybride rare : ingénieur de formation et ancien directeur technique dans l’industrie, en reconversion vers le développement web avec une approche structurée, pragmatique et orientée résultats.</p>
+		<p class="intro"><span class="icone_ext"><img src="icones/puzzle.png" class="icone" alt="icone puzzle"></span></p>
+		<p class="intro">Mon parcours m’a appris à analyser un besoin en profondeur, à transformer des problématiques complexes en solutions concrètes et à piloter des projets avec méthode. J’apporte une vision globale : compréhension des enjeux métiers, gestion des priorités, respect des délais et recherche constante d’efficacité. Je ne me limite pas à écrire du code ; je conçois des <b>solutions cohérentes, maintenables et évolutives</b>, pensées pour s’intégrer durablement dans l’organisation.</p>
+		<p class="intro"><span class="icone_ext"><img src="icones/portable.png" class="icone" alt="icone ordinateur"></span></p>
+		<p class="intro">Spécialisé en <b>HTML, CSS, JavaScript, PHP et SQL</b>, je développe des applications web performantes et structurées. Habitué aux environnements exigeants, je travaille avec rigueur, autonomie et sens des responsabilités. Mon expérience en direction technique me permet d’anticiper les contraintes réelles d’une entreprise : budget, qualité, coordination d’équipe, optimisation des processus et fiabilité des livrables.</p>
+		<p class="intro"><span class="icone_ext"><img src="icones/mains.png" class="icone" alt="icone poignée de mains"></span></p>
+		<p class="intro">Collaborer avec moi, c’est bénéficier d’un développeur capable de dialoguer aussi bien avec des profils techniques qu’avec des décideurs. J’apporte une capacité d’analyse solide, une organisation efficace et une orientation forte vers la valeur utilisateur. Mon objectif n’est pas seulement de produire du code fonctionnel, mais de <b>contribuer à des solutions utiles, robustes et créatrices de valeur</b> pour l’entreprise.</p>
+		<p class="intro"><span class="icone_ext"><img src="icones/croissance.png" class="icone" alt="icone grraphique croissance"></span></p>
+		<p class="intro">Curieux, investi et en apprentissage continu, je m’engage pleinement dans chaque mission avec l’ambition de <b>devenir rapidement un collaborateur autonome et à forte valeur ajoutée.</b></p>
+	</section>
+	
+	<!-- ! LIENS  -->
+	<section class="card">
+		<div class="buttons">
+			<a href="../cv/cv.html" target="_blank" rel="noopener noreferrer" class="btn">Voir mon CV</a>
+			<a href="../portfolio/portfolio.html" class="btn secondary">Voir mon Portfolio</a>
+		</div>
+		<div class="links">
+			<a href="https://github.com/pierrepelerin" target="_blank" rel="noopener noreferrer">GitHub</a>
+			<a href="mailto:ppelerin@gmail.com">Contact</a>
+		</div>
+		<p class="copy">Copyright &copy; 2026 Pierre PELERIN</p>
+	</section>
+</main>
 
-      <h1>Pierre PELERIN</h1>
-      <h2>Développeur Web Full Stack</h2>
-
-      <p class="intro">
-        Ingénieur de formation en reconversion vers le développement web.
-        Spécialisé en HTML, CSS, JavaScript, PHP et Node.js.
-        Passionné par les projets utiles, bien conçus et orientés utilisateur.
-      </p>
-
-      <div class="buttons">
-        <a href="cv/cv.html" class="btn">Voir mon CV</a>
-        <a href="portfolio/portfolio.html" class="btn secondary">Voir mon Portfolio</a>
-      </div>
-
-      <div class="links">
-        <a href="https://github.com/pierrepelerin" target="_blank">GitHub</a>
-        <a href="mailto:ppelerin@gmail.com">Contact</a>
-      </div>
-
-    </div>
-  </main>
+<!-- ! SCRIPT JS POUR GESTION OPACITE ICONES -->
+<script defer>
+	const icons = document.querySelectorAll(".icone_ext");
+	// Fonction qui va recalculer la luminosité des icônes
+	function updateBrightness() {
+		const windowHeight = window.innerHeight; 
+		icons.forEach(icon => { // Pour chaque icône...
+			const rect = icon.getBoundingClientRect(); // Donne la position de l'icône par rapport à la fenêtre visible
+			let ratio = rect.top / windowHeight; // On transforme la position en valeur entre 0 et 1 (haut de l'écran : 0 ; bas de l'écran : 1)
+			ratio = Math.max(0, Math.min(1, ratio)); // On empêche la valeur de sortir de l'intervalle 0;1
+			const brightness = 1.2 - (ratio * 1); // Si ratio = 0 : opacité de 1.2 (clair), si ration de 1 : opacité de 0.2 (sombre)
+			icon.style.filter = `brightness(${brightness})`; // On applique le style CSS
+		});
+	}
+	window.addEventListener("scroll", () => requestAnimationFrame(updateBrightness)); // Optimisation pour le scroll (on synchronise avec le rafraichissement de l'écran pour éviter que la fonction ne se déclenche des centaines de fois par seconde)
+	window.addEventListener("resize", updateBrightness); // Si la hauteur d'écran change (resize), on recalcule
+	window.addEventListener("load", updateBrightness); // On applique l'effet dès le chargement de la page
+</script>
 
 </body>
 </html>
